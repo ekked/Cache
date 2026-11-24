@@ -65,6 +65,7 @@ return array(
     'ezcCacheStackOptions'                   => 'Cache/options/stack.php',
     'ezcCacheStackStorageConfiguration'      => 'Cache/stack/storage_configuration.php',
     'ezcCacheStorageApcPlain'                => 'Cache/storage/apc/plain.php',
+    'ezcCacheStorageApcuPlain'               => 'Cache/storage/apcu/plain.php',
     'ezcCacheStorageFileApcArray'            => 'Cache/storage/apc/apc_array.php',
     'ezcCacheStorageFileApcArrayDataStruct'  => 'Cache/structs/file_apc_array_data.php',
     'ezcCacheStorageFileApcArrayOptions'     => 'Cache/options/storage_apc_array.php',
