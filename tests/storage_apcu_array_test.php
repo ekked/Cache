@@ -738,6 +738,31 @@ class ezcCacheStorageFileApcuArrayTest extends ezcCacheStorageTest
         return $property->getValue( $storage );
     }
 
+    public function testStoreObjectRefused()
+    {
+        try
+        {
+            $this->storage->store( "key", new stdClass() );
+            $this->fail( "Expected exception was not thrown." );
+        }
+        catch ( ezcCacheInvalidDataException $e )
+        {
+            $this->assertEquals( "The given data was of type 'object', which can not be stored. Expecting: 'simple, array'.", $e->getMessage() );
+        }
+    }
+
+    public function testArrayRoundTripUsesApcu()
+    {
+        $this->storage->reset();
+        $data = array( 'a' => array( 1, 2, 3 ), 'b' => 'text' );
+        $this->storage->store( 'roundtrip', $data );
+        $this->assertSame( $data, $this->storage->restore( 'roundtrip' ) );
+
+        $property = new ReflectionProperty( 'ezcCacheStorageMemory', 'backend' );
+        $property->setAccessible( true );
+        $this->assertInstanceOf( 'ezcCacheApcuBackend', $property->getValue( $this->storage ) );
+    }
+
     public static function suite()
 	{
 		return new PHPUnit\Framework\TestSuite( __CLASS__ );
