@@ -52,6 +52,7 @@ return array(
     'ezcCacheStorageFile'                    => 'Cache/storage/file.php',
     'ezcCacheStorageMemcache'                => 'Cache/storage/memcache.php',
     'ezcCacheApcBackend'                     => 'Cache/backends/apc/apc_backend.php',
+    'ezcCacheApcuBackend'                    => 'Cache/backends/apcu/apcu_backend.php',
     'ezcCacheManager'                        => 'Cache/manager.php',
     'ezcCacheMemcacheBackend'                => 'Cache/backends/memcache/memcache_backend.php',
     'ezcCacheMemoryVarStruct'                => 'Cache/structs/memory_var.php',
