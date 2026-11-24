@@ -133,5 +133,22 @@ class ezcCacheApcuBackendTest extends ezcTestCase
         $this->backend->reset();
         $this->assertFalse( $this->backend->fetch( 'expc_apcu_b' ) );
     }
+
+    public function testApcStorageRefusedWithoutApcExtension()
+    {
+        if ( extension_loaded( 'apc' ) )
+        {
+            $this->markTestSkipped( "PHP has the apc extension." );
+        }
+        try
+        {
+            new ezcCacheStorageApcPlain( sys_get_temp_dir() );
+            $this->fail( "Expected ezcBaseExtensionNotFoundException." );
+        }
+        catch ( ezcBaseExtensionNotFoundException $e )
+        {
+            $this->assertStringContainsString( 'apc', $e->getMessage() );
+        }
+    }
 }
 ?>
