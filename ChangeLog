@@ -1,3 +1,12 @@
+1.6.5 - [unreleased]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Added: ezcCacheStorageApcuPlain, ezcCacheStorageFileApcuArray and
+  ezcCacheApcuBackend store in the APCu user cache, so the APC storages' job is
+  done on PHP 8, where the apc extension does not exist. The APC storages are
+  unchanged.
+
+
 1.6.4 - Friday 6 November 2026
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
