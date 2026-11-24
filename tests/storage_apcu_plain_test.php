@@ -768,6 +768,26 @@ class ezcCacheStorageApcuPlainTest extends ezcCacheStorageTest
         $this->assertSame( array( 'a' => 1 ), $this->storage->restore( 'stacked' ) );
     }
 
+    public function testSharesStoreWithApcStorage()
+    {
+        if ( !extension_loaded( 'apc' ) || !function_exists( 'apc_store' ) )
+        {
+            $this->markTestSkipped( "PHP must have the apc functions (apcu_bc) next to apcu." );
+        }
+        if ( !ini_get( 'apc.enabled' ) || !ini_get( 'apc.enable_cli' ) )
+        {
+            $this->markTestSkipped( "APC is loaded but disabled: run PHP with -d apc.enable_cli=1." );
+        }
+
+        $location = $this->getTempDir();
+        $apc = new ezcCacheStorageApcPlain( $location, array( 'ttl' => 10 ) );
+        $apcu = new ezcCacheStorageApcuPlain( $location, array( 'ttl' => 10 ) );
+        $apc->reset();
+
+        $apc->store( 'shared', array( 'x' => 1 ) );
+        $this->assertSame( array( 'x' => 1 ), $apcu->restore( 'shared' ) );
+    }
+
     public static function suite()
 	{
 		return new PHPUnit\Framework\TestSuite( __CLASS__ );
